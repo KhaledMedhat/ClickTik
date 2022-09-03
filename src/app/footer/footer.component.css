@@ -1,0 +1,16 @@
+ footer {
+    display:flex; 
+   justify-content: space-between;
+    padding: 40px 15%;
+    background-color:#1D2939 ;
+    color: white;
+    font-size: 17px;
+
+   
+} 
+.footer-img{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+

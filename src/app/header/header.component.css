@@ -1,0 +1,37 @@
+
+
+.body{
+    display: flex;
+    flex-direction: column;
+ }
+ .header-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px 10%;
+    border-bottom: 1px solid rgb(216, 213, 213) ;
+    color: rgb(155, 154, 154);
+    
+ }
+ a, li, ul {
+    list-style: none;
+    text-decoration: none;
+    color: rgb(155, 154, 154);
+ }
+
+ .rightside {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+ }
+
+ .leftside{
+
+    display: flex;
+    align-items: center;
+  gap:10px;
+    margin-right: auto;
+ }
+
+
+

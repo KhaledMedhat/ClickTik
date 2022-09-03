@@ -1,0 +1,157 @@
+<div class="body">
+    <header class="header-container">
+        <img
+            style="width: 32px; height: 32px; margin-right: 10px"
+            src="../../assets/logo.png"
+        />
+        <p>ClickTik</p>
+        <a class="home" routerLink="/shop">Home</a>
+        <nav>
+            <div class="rightside">
+                <input
+                    class="search"
+                    type="text"
+                    placeholder=" Search.."
+                    name="title"
+                    [(ngModel)]="search"
+                />
+
+                <span class="counter"> {{ totalItems }}</span>
+                <img
+                    class="shoppingcart-img"
+                    src="../../assets/shoppingcart.png"
+                />
+                <a routerLink="/shop">Account</a>
+            </div>
+        </nav>
+    </header>
+    <div *ngIf="isClicked" class="product-counter">
+        <p>({{ productsCount }}) Products found</p>
+    </div>
+    <div class="upper-content">
+        <h1>Shop</h1>
+        <br />
+        <p style="font-weight: bold">Home / Products</p>
+    </div>
+    <div class="container">
+        <div class="category-container">
+            <p style="font-weight: bold; padding-bottom: 15px">Products</p>
+            <div *ngFor="let category of categories">
+                <input
+                    value="{{ category }}"
+                    (change)="categoryFilter($event)"
+                    class="input"
+                    type="checkbox"
+                />
+                <label
+                    style="padding-left: 7px; color: 11eE1E; font-weight: bold"
+                    >{{ category }}</label
+                >
+            </div>
+        </div>
+
+        <!-- (filter: search) is a Searching library Ng2SearchPipeModule -->
+        <div
+            class="products-container"
+            *ngFor="
+                let product of products
+                    | slice: startIndex:endIndex
+                    | filter: search
+            "
+        >
+            <div class="product-card">
+                <img class="product-img" src="{{ product.thumbnail }}" />
+                <p class="product-percent">
+                    -{{ product.discountPercentage }}%
+                </p>
+                <div class="content">
+                    <p style="font-size: 20px; font-weight: 900">
+                        {{ product.title }}
+                    </p>
+                    <br />
+                    <p style="font-size: 14px">{{ product.description }}</p>
+                    <br />
+
+                    <span
+                        style="font-weight: bold; text-decoration: line-through"
+                        >{{ product.price }}&nbsp; </span
+                    >USD
+                    <span style="font-weight: bold; padding-left: 20px"
+                        >{{
+                            (
+                                product.price -
+                                (product.discountPercentage / 100) *
+                                    product.price
+                            ).toFixed(2)
+                        }}
+                        &nbsp;</span
+                    >USD
+                    <br />
+                    <br />
+                    <p>
+                        Brand:
+                        <span style="font-weight: bold">{{
+                            product.brand
+                        }}</span>
+                    </p>
+
+                    <p>
+                        Category:
+                        <span style="font-weight: bold">{{
+                            product.category
+                        }}</span>
+                    </p>
+                    <p>
+                        In stock:
+                        <span style="font-weight: bold">
+                            {{ product.stock }}</span
+                        >
+                    </p>
+
+                    <p
+                        style="
+                            padding-right: 20px;
+                            text-align: right;
+                            color: #f4b000;
+                            font-weight: bold;
+                        "
+                    >
+                        <span
+                            style="position: relative; top: 5px; left: 3px"
+                            class="material-icons"
+                        >
+                            star
+                        </span>
+                        {{ product.rating }}
+                        <span style="color: grey">(11)</span>
+                    </p>
+                </div>
+
+                <button (click)="addToCart(items)" class="button">
+                    ADD TO CART
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="pagination">
+        <ul class="pagination-container">
+            <li>
+                <a href="javascript:void(0)" (click)="decrementPage()">
+                    <span>&lt; </span>
+                </a>
+            </li>
+            <li *ngFor="let page_number of getPages()">
+                <a
+                    href="javascript:void(0)"
+                    (click)="jumptoPage(page_number)"
+                    >{{ page_number }}</a
+                >
+            </li>
+            <li>
+                <a href="javascript:void(0)" (click)="incrementPage()">
+                    <span>&gt;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

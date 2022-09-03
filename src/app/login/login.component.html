@@ -1,0 +1,37 @@
+<app-header></app-header>
+<div class="container">
+    <div class="img-container">
+        <img style="width: 48px; height: 48px" src="../../assets/logo.png" />
+    </div>
+    <form [formGroup]="loginForm" (submit)="onSubmit()">
+        <div class="form-container">
+            <img src="" alt="" />
+            <p class="main">Log in to your account</p>
+            <p class="sub">Welcome back! Please enter your details</p>
+            <label for="email">Email</label>
+            <input
+                type="text"
+                formControlName="username"
+                placeholder="Enter Username"
+            />
+            <small *ngIf="form['username'].invalid && isSubmitted">
+                <span class="error">Email is Invalid</span>
+            </small>
+
+            <label class="password" for="password">Password</label>
+            <input
+                type="password"
+                formControlName="password"
+                placeholder="Enter Password"
+            />
+            <small *ngIf="form['password'].invalid && isSubmitted">
+                <span class="error">Passowrd is Invalid</span>
+            </small>
+
+            <input class="submit" type="submit" value="Sign in" />
+            <small *ngIf="isSubmitted && authError" class="error">{{
+                authMessage
+            }}</small>
+        </div>
+    </form>
+</div>
